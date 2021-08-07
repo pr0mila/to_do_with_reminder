@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'new_item_view.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -40,24 +42,63 @@ class _MyHomePageState extends State<MyHomePage> {
        title: Text('My Tasks on progress'),
        centerTitle: true,
      ),
-      body: ListView.builder(
-          itemCount: list.length,
-          itemBuilder: (context,index){
-            return ListTile(
-              title: Text(list[index].title),
-              trailing: Checkbox(value:list[index].complete, onChanged:null),
-              onTap: ()=>setCompleteness(list[index]),
-            );
-          }
+      body: buidBody(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => goToNewItemView()
       ),
 
     );
   }
+
+  Widget buidBody(){
+    return ListView.builder(
+      itemCount: list.length,
+      itemBuilder: (context,index){
+             return buildItem(list[index]);
+
+
+      }
+      );
+  }
+  
+  Widget buildItem(Todo item)
+  {
+    return Dismissible(
+     key: Key(item.hashCode.toString()),
+     onDismissed: (direction) => removeItem(item),
+     direction: DismissDirection.startToEnd,
+     background: Container(
+       color: Colors.red[600],
+       child: Icon(Icons.delete, color: Colors.white,),
+       alignment: Alignment.centerLeft,
+       padding: EdgeInsets.only(left: 12.0),
+     ),
+      child: ListTile(
+        title: Text(item.title),
+        trailing: Checkbox(value:item.complete, onChanged:null),
+        onTap: ()=>setCompleteness(item),
+      ),
+    );
+  }
+
   void setCompleteness(Todo item){
     setState(() {
       item.complete =! item.complete;
     });
 
+  }
+
+  void removeItem(Todo item) {
+    list.remove(item);
+
+  }
+
+  void goToNewItemView() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder:(context){
+          return NewItemView();
+        }));
   }
 }
 
