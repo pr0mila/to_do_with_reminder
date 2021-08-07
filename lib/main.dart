@@ -93,14 +93,20 @@ class _MyHomePageState extends State<MyHomePage> {
     list.remove(item);
 
   }
+  void addTodo(Todo item) {
+    list.add(item);
+
+  }
 
   void goToNewItemView() {
     Navigator.of(context).push(MaterialPageRoute(
         builder:(context){
           return NewItemView();
-        }));
+        })).then((title) {
+          if(title!=null)addTodo(Todo(title: title));
+        });
+    }
   }
-}
 
 
 class Todo {

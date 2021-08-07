@@ -7,6 +7,7 @@ class NewItemView extends StatefulWidget {
 }
 
 class _NewItemViewState extends State<NewItemView> {
+  TextEditingController textFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,9 @@ class _NewItemViewState extends State<NewItemView> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(),
+              TextField(
+                controller: textFieldController,
+              ),
               TextButton(
                 onPressed: save,
                 child: Text('Save',
@@ -34,6 +37,7 @@ class _NewItemViewState extends State<NewItemView> {
   }
 
   void save() {
-    print('Save');
+    if(textFieldController.text.isNotEmpty)
+      Navigator.of(context).pop(textFieldController.text);
   }
 }
