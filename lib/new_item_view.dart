@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class NewItemView extends StatefulWidget {
 
+
   @override
   _NewItemViewState createState() => _NewItemViewState();
 }
