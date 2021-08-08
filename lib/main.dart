@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Todo.dart';
 import 'new_item_view.dart';
+import 'LocalNotificationScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -57,12 +58,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('My Tasks on progress'),
         centerTitle: true,
+        leading: IconButton(
+        tooltip: 'Leading Icon',
+        icon: const Icon(
+        Icons.alarm,
+       ),
+        onPressed: () => LocalNotificationScreen(),
+       ),
       ),
+
       body: buidBody(),
+
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () => goToNewItemView()
       ),
+
 
     );
   }
