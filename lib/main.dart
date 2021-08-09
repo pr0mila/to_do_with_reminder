@@ -2,12 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:to_do_with_reminder/notification_service.dart';
 
 import 'Todo.dart';
+import 'mainscreen.dart';
 import 'new_item_view.dart';
-import 'LocalNotificationScreen.dart';
+//import 'LocalNotificationScreen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotification();
   runApp(MyApp());
 }
 
@@ -63,7 +67,12 @@ class _MyHomePageState extends State<MyHomePage> {
         icon: const Icon(
         Icons.alarm,
        ),
-        onPressed: () => LocalNotificationScreen(),
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>MainScreen()),
+          );
+        },
        ),
       ),
 
