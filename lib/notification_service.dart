@@ -12,7 +12,7 @@ class NotificationService{
   NotificationService._internal();
   Future<void> initNotification() async {
     final AndroidInitializationSettings InitializationSettingsAndroid =
-    AndroidInitializationSettings('ic_launcher.png');
+    AndroidInitializationSettings('ic_launcher');
 
     final IOSInitializationSettings InitializationSettingsIOS = IOSInitializationSettings(
         requestAlertPermission: false,
@@ -39,7 +39,7 @@ class NotificationService{
               'Main channel notifications',
               importance: Importance.max,
               priority: Priority.max,
-              icon: 'ic_launcher.png'
+              icon: 'ic_launcher'
           ),
           iOS: IOSNotificationDetails(
             sound: 'default.wav',
